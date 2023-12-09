@@ -13,7 +13,7 @@ const BlogPost = require('../models/blogpost');
 //       res.render('about/index', {profiles})
 //   }))
   
-  router.get('/new', isLoggedIn, catchAsync(async (req, res) => {
+  router.get('/new', catchAsync(async (req, res) => {
     res.render('about/new')
   }))
 
@@ -24,7 +24,7 @@ const BlogPost = require('../models/blogpost');
   }))
   
   
-  router.post('/new', isLoggedIn, upload.single('image'), catchAsync(async (req, res, next) => {
+  router.post('/new', upload.single('image'), catchAsync(async (req, res, next) => {
     try {
       const { name, pname, username, password, image, filename, bio } = req.body;
       const profile = new Profile({ name, pname, username, image, filename, bio });
