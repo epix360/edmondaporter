@@ -14,13 +14,13 @@ const BlogPost = require('../models/blogpost');
 //   }))
   
   router.get('/new', isLoggedIn, catchAsync(async (req, res) => {
-    res.render('about/new', { currentPage: 'about' })
+    res.render('about/new');
   }))
 
-  router.get('/', isLoggedIn, catchAsync(async (req, res) => {
+  router.get('/', catchAsync(async (req, res) => {
     const profile = await Profile.findOne({ id: { $eq: req.params._id } });
     const blogPosts = await BlogPost.find({ profile: profile._id }).sort({ date: -1 });
-    res.render('about/show', {currentPage: 'about'})
+    res.render('about/show', { profile, blogPosts, currentPage: 'about' })
   }))
   
   
