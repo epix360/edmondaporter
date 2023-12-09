@@ -18,8 +18,8 @@ const BlogPost = require('../models/blogpost');
   }))
 
   router.get('/', catchAsync(async (req, res) => {
-    const profile = await Profile.findOne({ id: { $eq: req.params._id } });
-    const blogPosts = await BlogPost.find({ profile: profile._id }).sort({ date: -1 });
+    // const profile = await Profile.findOne({ id: { $eq: req.params._id } });
+    // const blogPosts = await BlogPost.find({ profile: profile._id }).sort({ date: -1 });
     res.render('about/show', { profile, blogPosts, currentPage: 'about' })
   }))
   
