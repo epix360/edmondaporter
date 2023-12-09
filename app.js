@@ -160,7 +160,7 @@ app.get('/', catchAsync(async (req, res) => {
   res.render('index', { profile, home, homes, currentPage: 'home' })
 }))
 
-app.get('/new', catchAsync(async (req, res) => {
+app.get('/new', isLoggedIn, catchAsync(async (req, res) => {
   res.render('new', { currentPage: 'home' })
 }))
 
