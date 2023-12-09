@@ -1,0 +1,10 @@
+<% layout('/layouts/boilerplate') %>
+  <ul>
+    <% for (let profile of profiles) { %>
+      <a href="/about/<%= profile.pname %>/">
+        <li>
+          <%= profile.name %>
+        </li>
+      </a>
+      <% } %>
+  </ul>

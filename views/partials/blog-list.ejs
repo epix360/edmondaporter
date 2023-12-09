@@ -1,0 +1,17 @@
+<div class="position-sticky top-0 start-0 pt-2 pb-2">
+  <details id="postAccordion">
+    <summary>
+      <h3 class="d-inline">Posts</h3>
+    </summary>
+    <ul class="blog-list">
+      <% for (let blogPost of blogPosts) { %>
+        <li class="blog-list-item"><a href="/blog/<%=blogPost.slug%>">
+            <%=blogPost.title%>
+          </a></li>
+        <% } %>
+    </ul>
+  </details>
+  <% if (currentPage !== "blog/archive") { %>
+  <a class="btn-link" href="/blog/archive">See all posts</a>
+  <% } %>
+</div>

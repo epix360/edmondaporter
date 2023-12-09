@@ -1,0 +1,341 @@
+$screen-sm: 320px;
+$screen-md: 768px;
+$screen-lg: 1280px;
+$screen-xl: 1440px;
+
+$font-serif: 'EB Garamond', 'Times New Roman', Times, serif;
+$font-sans: 'Inter', Arial, Helvetica, sans-serif;
+
+$danger: #A03838; //Auburn
+$warning: #FC9E2D; //Fulvous
+$info: #267CAB; //Lapis Lazuli
+$success: #157F1F; //Office Green
+$light: #F5F5F5; //White Smoke
+$black: #07070A; //Black
+$dark: #030027; //Oxford Blue
+
+$danger-hover: #BA5252; //Auburn
+$warning-hover: #FFB746; //Fulvous
+$info-hover: #4096C5; //Lapis Lazuli
+$success-hover: #2F9939; //Office Green
+
+body {
+    background-color: $light;
+    font-family: $font-sans;
+    color: $dark;
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+        font-family: $font-serif;
+
+        a {
+            text-decoration: none;
+            color: $dark;
+        }
+    }
+
+    .alert {
+        &.alert-success {
+            background-color: $success;
+            color: $light;
+
+            .btn-close {
+                color: white;
+                fill: white;
+                stroke: white;
+                filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(46deg) brightness(97%) contrast(106%);
+            }
+        }
+
+        &.alert-warning {
+            background-color: $warning;
+        }
+
+        &.alert-info {
+            background-color: $info;
+        }
+
+        &.alert-danger {
+            background-color: $danger;
+        }
+    }
+
+    details summary::-webkit-details-marker,
+    details summary::marker {
+        display: none;
+        content: "";
+
+        @media screen and (max-width: $screen-md) {
+            content: url(/img/chevron-right.svg);
+        }
+    }
+
+    details[open] summary::-webkit-details-marker,
+    details[open] summary::marker {
+        display: none;
+        content: "";
+
+        @media screen and (max-width: $screen-md) {
+            content: url(/img/chevron-down.svg);
+        }
+    }
+
+    #postAccordion {
+        summary {
+            @media screen and (min-width: $screen-md) {
+                pointer-events: none;
+                user-select: none;
+            }
+        }
+    }
+
+    a {
+        color: $info;
+
+        &.btn-link {
+            color: $info;
+            text-decoration: none;
+            margin: 0 2px;
+            position: relative;
+            transition: ease 250ms;
+
+            &:before {
+                position: absolute;
+                margin: 0 auto;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: $danger;
+                content: '';
+                opacity: .3;
+                transform: scaleX(.9);
+                -webkit-transform: scaleX(.9);
+                transition-property: opacity, -webkit-transform;
+                transition-duration: .3s;
+            }
+
+            &:hover {
+                color: $info-hover;
+                font-size: 1.035rem;
+                margin: 0 1px;
+                transition: ease 250ms;
+
+                &:before {
+                    opacity: 1;
+                    transform: scaleX(1);
+                    -webkit-transform: scaleX(1);
+                }
+            }
+        }
+
+        &.back-btn {
+            text-decoration: none;
+
+            &:before {
+                display: inline-block;
+                content: "";
+                vertical-align: -.155em;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>');
+                transform: rotate(180deg);
+                filter: invert(47%) sepia(14%) saturate(2230%) hue-rotate(157deg) brightness(87%) contrast(92%);
+                background-repeat: no-repeat;
+                height: 1rem;
+                width: 1rem;
+                margin-right: 5px;
+                transition: ease-in-out 90ms;
+            }
+
+            &:hover {
+                &:before {
+                    filter: invert(47%) sepia(81%) saturate(366%) hue-rotate(157deg) brightness(97%) contrast(90%);
+                    margin-left: -5px;
+                    margin-right: 10px;
+                    transition: ease-in-out 90ms;
+                }
+            }
+        }
+    }
+
+    ul {
+        padding-left: 1.25rem;
+
+        a {
+            text-decoration: none;
+
+            &:after {
+                display: inline-block;
+                content: "";
+                vertical-align: -.155em;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>');
+                background-repeat: no-repeat;
+                filter: invert(47%) sepia(14%) saturate(2230%) hue-rotate(157deg) brightness(87%) contrast(92%);
+                height: 1rem;
+                width: 1rem;
+                transition: ease-in-out 90ms;
+            }
+
+            &:hover {
+                &:after {
+                    filter: invert(47%) sepia(81%) saturate(366%) hue-rotate(157deg) brightness(97%) contrast(90%);
+                    margin-left: 5px;
+                    transition: ease-in-out 90ms;
+                }
+            }
+        }
+    }
+
+    .btn-danger {
+        background-color: $danger;
+        border-color: $danger;
+
+        &:hover {
+            background-color: $danger-hover;
+            border-color: $danger-hover;
+        }
+    }
+
+    .btn-warning {
+        background-color: $warning;
+        border-color: $warning;
+
+        &:hover {
+            background-color: $warning-hover;
+            border-color: $warning-hover;
+        }
+    }
+
+    .btn-info {
+        background-color: $info;
+        border-color: $info;
+        color: $light;
+
+        &:hover {
+            background-color: $info-hover;
+            border-color: $info-hover;
+            color: $light;
+        }
+    }
+
+    .btn-success {
+        background-color: $success;
+        border-color: $success;
+
+        &:hover {
+            background-color: $success-hover;
+            border-color: $success-hover;
+        }
+    }
+
+    blockquote {
+        font-size: 1.5rem;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C" "\201D" "\2018" "\2019";
+    }
+
+    blockquote:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    blockquote p {
+        display: inline;
+    }
+
+    article {
+        &:not(:first-child) {
+            padding-top: 30px;
+        }
+
+        &:not(:last-child) {
+            &:after {
+                content: "";
+                display: block;
+                margin: 0 auto;
+                width: 98%;
+                padding-top: 30px;
+                border-bottom: 1px solid lightgray;
+            }
+        }
+
+        p {
+            &:first-child {
+
+                //DROP CAP
+                &:first-letter {
+                    font-weight: bold;
+                    color: #a03838;
+                    text-transform: capitalize;
+                    float: left;
+                    font-family: $font-serif;
+                    font-size: 84px;
+                    line-height: 30px;
+                    padding-top: 20px;
+                    padding-right: 5px;
+                }
+            }
+        }
+
+        img {
+            @media (min-width: $screen-md) {
+                float: left;
+                width: 50%;
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    nav {
+        .contain-max {
+            max-width: 1400px;
+        }
+    }
+
+    .navbar {
+        position: relative;
+        border-bottom: 1px solid lightgray;
+
+        .nav-link {
+            transition: all ease-in-out 200ms;
+
+            &:hover {
+                padding-top: 6px;
+                transition: all ease-in-out 200ms;
+            }
+        }
+
+        .container-fluid {
+            @media (max-width: $screen-md) {
+                justify-content: center;
+            }
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            z-index: -1;
+            background-image: url('/img/texture.webp');
+            opacity: .5;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="mb-3">
+        <% if(currentUser && profile.equals(currentUser._id)) { %>
+            <a class="btn btn-info" href="/blog/<%=blogPost.slug%>/edit">Edit Post</a>
+            <form class="d-inline" action="/blog/<%=blogPost.slug%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-danger">Delete Post</button>
+            </form>
+            <% } %>
+    </div>
+    <div class="row">
+        <a href="/blog" class="back-btn">Back</a>
+        <div class="col-lg-9">
+            <%-include('../partials/blog-article.ejs')%>
+        </div>
+        <div class="col-lg-3">
+            <%-include('../partials/blog-list')%>
+        </div>
+    </div>
+    <script src="/js/post-list-handler.js"></script>

@@ -1,0 +1,21 @@
+<% layout('/layouts/boilerplate') %>
+    <h1>Links</h1>
+    <div class="row">
+        <div class="col col-md-6 offset-md-3">
+            <form id="editLinksForm" action="/links/<%=link._id%>?_method=PUT" method="POST" novalidate
+                class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="content">Edit link list</label>
+                    <input type="hidden" id="imageIds" name="link[imageIds]">
+                    <input type="hidden" id="imageIdsToDelete" name="link[imageIdsToDelete]">
+                    <input type="hidden" id="content" name="content" aria-describedby="content" required>
+                    <div id="editor-container" class="form-control editor-container"><%-link.content%></div>
+                </div>
+                <div class="my-3 text-end">
+                    <button type="submit" class="btn btn-success d-inline-block mb-3">Save changes</button>
+                    <a class="d-block" href="/links">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/editor-image-handler.js"></script>

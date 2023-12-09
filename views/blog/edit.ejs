@@ -1,0 +1,27 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <div class="col col-md-6 offset-md-3">
+            <h2 class="h1">Edit post</h2>
+            <form id="editPostForm" action="/blog/<%=blogPost.slug%>?_method=PUT" method="POST" novalidate
+                class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="blogPost[title]"
+                        value="<%=blogPost.title%>" aria-describedby="title" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="content">Content</label>
+                    <input type="hidden" id="imageIds" name="blogPost[imageIds]">
+                    <input type="hidden" id="imageIdsToDelete" name="blogPost[imageIdsToDelete]">
+                    <input type="hidden" id="content" name="content" aria-describedby="content" required>
+                    <div id="editor-container" class="form-control editor-container"><%-blogPost.content%></div>
+                </div>
+                <div class="my-3 text-end">
+                    <button type="submit" class="btn btn-success d-inline-block mb-3">Submit</button>
+                    <a class="d-block" href="/blog/<%= blogPost.slug %>">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/post-list-handler.js"></script>
+    <script type="text/javascript" src="/js/editor-image-handler.js"></script>

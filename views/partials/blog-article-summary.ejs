@@ -1,0 +1,6 @@
+<article class="row">
+    <h2><a href="/blog/<%=blogPost.slug%>"><%=blogPost.title%></a></h2>
+    <p><small>By <%=profile.name%> | <%=blogPost.date.toLocaleDateString('en-us', { year:"numeric",
+                    month:"short", day:"numeric"})%></small></p>
+    <div><%-blogPost.content.slice(0, 901)%>... [<a href="/blog/<%=blogPost.slug%>">Read more</a>]</div>
+</article>

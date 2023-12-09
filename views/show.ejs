@@ -1,0 +1,25 @@
+<% layout('/layouts/boilerplate') %>
+  <div class="row">
+    <div class="col" id="page-heading">
+      <h1>
+        <%=home.heading%>
+      </h1>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <% if(currentUser && profile.equals(currentUser._id)) { %>
+          <a href="/edit" class="btn btn-info">Edit</a>
+          <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" id="main-image">
+      <img src="<%=home.image%>" class="img-fluid" alt="">
+    </div>
+    <div class="col-md-8" id="main-content">
+      <article>
+        <%-home.content%>
+      </article>
+    </div>
+  </div>

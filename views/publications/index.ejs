@@ -1,0 +1,25 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <div class="col">
+            <h1>Publications</h1>
+        </div>
+        <div class="col">
+            <div class="text-end">
+                <% if(currentUser && profile.equals(currentUser._id)) { %>
+                    <div class="mb-3">
+                        <a class="btn btn-info" href="/publications/<%=publication._id%>/edit">Edit Publication List</a>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <% for (let publication of publications) { %>
+                    <%- publication.content %>
+                        <% } %>
+            </div>
+        </div>
+
+    </div>

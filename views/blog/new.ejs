@@ -1,0 +1,26 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <h2 class="h1">Blog</h2>
+        <h3>Write a new blog post</h3>
+        <div class="col-6 offset-3">
+            <form id="newPostForm" action="/blog" method="POST" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="blogPost[title]" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="content">Content</label>
+                    <input type="hidden" id="imageIds" name="blogPost[imageIds]">
+                    <input type="hidden" id="imageIdsToDelete" name="blogPost[imageIdsToDelete]">
+                    <input type="hidden" id="content" name="blogPost[content]" aria-describedby="content" required>
+                    <div id="editor-container" class="form-control editor-container"></div>
+                </div>
+                <div class="mb-3">
+                    <button id="newPostFormSubmitBtn" type="submit" class="btn btn-success">Create Post</button>
+                </div>
+                <a href="/blog">Cancel</a>
+            </form>
+        </div>
+    </div>
+    <script src="/js/post-list-handler.js"></script>
+    <script type="module" src="/js/editor-image-handler.js"></script>

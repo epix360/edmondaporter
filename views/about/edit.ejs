@@ -1,0 +1,51 @@
+<% layout('/layouts/boilerplate') %>
+  <h2 class="h1">Edit profile</h2>
+  <form id="bioEditForm" action="/about?_method=PUT" method="POST" novalidate class="validated-form"
+    enctype="multipart/form-data">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-control" type="text" name="name" id="name" placeholder="name" spellcheck="true"
+            value="<%= profile.name %>" aria-describedby="name" required>
+          <input type="hidden" id="pname" name="pname" value="<%= profile.pname %>">
+        </div>
+        <div class="mb-3 d-none" id="uploader">
+          <label for="image" class="form-label">Upload profile picture</label>
+          <input class="form-control mb-3" name="image" type="file" id="image" value="<%= profile.image %>" required>
+          <% if(profile.image) { %>
+            <a href="#" class="btn btn-info" id="cancelBtn">Cancel</a>
+            <% } %>
+        </div>
+        <div class="mb-3" id="currentPic">
+          <p>Profile picture</p>
+          <img class="img-thumbnail" width="300" src="<%= profile.image %>" alt="">
+          <a class="btn btn-info" href="#" id="updatePhotoBtn">Update profile picture</a>
+        </div>
+      </div>
+      <div class="col">
+        <article>
+          <label class="form-label" for="bio">Bio</label>
+          <input type="hidden" name="bio" id="bio" aria-describedby="bio">
+          <div id="editor-container" class="form-control editor-container"><%- profile.bio %></div>
+          <div class="my-3 text-end">
+            <button type="submit" class="btn btn-success d-inline-block mb-3">Submit</button>
+            <a class="d-block" href="/about">Cancel</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </form>
+  <script>
+    const name = document.getElementById('name');
+    const pname = document.getElementById('pname')
+
+    name.addEventListener("change", updateValue);
+
+    function updateValue(e) {
+      pname.value = e.target.value.trim().toLowerCase().replace(/\s+/g, '-').normalize('NFKD').replace(/[^\w\s.\-_\/]/g, '');
+      console.log(pname)
+    }
+  </script>
+  <script src="/js/editor-image-handler.js"></script>

@@ -1,0 +1,51 @@
+<% layout('/layouts/boilerplate') %>
+    <h2 class="h1">
+        Create a profile
+    </h2>
+    <form id="newBioForm" action="/about/new" method="POST" novalidate class="needs-validation"
+        enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" type="text" id="name" name="name" aria-describedby="name" required>
+                    <input type="hidden" id="pname" name="pname">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" type="text" id="username" name="username" aria-describedby="username"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" id="password" name="password"
+                        aria-describedby="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload profile picture</label>
+                    <input class="form-control" name="image" type="file" id="image" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="bio">Bio</label>
+                <input type="hidden" name="bio" id="bio" aria-describedby="bio" required>
+                <div id="editor-container" class="form-control editor-container"></div>
+            </div>
+            <div class="mb-3">
+                <button type="submit">Create Profile</button>
+            </div>
+        </div>
+    </form>
+    <a href="/">Cancel</a>
+    </div>
+    <script>
+        const name = document.getElementById('name');
+        const pname = document.getElementById('pname')
+        name.addEventListener("change", updateValue);
+
+        function updateValue(e) {
+            pname.value = e.target.value.trim().toLowerCase().replace(/\s+/g, '-').normalize('NFKD').replace(/[^\w\s.\-_\/]/g, '').replace(/\./g, "");
+            console.log(pname)
+        }
+    </script>
+      <script src="/js/editor-image-handler.js"></script>

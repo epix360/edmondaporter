@@ -1,0 +1,21 @@
+<% layout('/layouts/boilerplate') %>
+    <h1>Publications</h1>
+    <div class="row">
+        <div class="col col-md-6 offset-md-3">
+            <form id="editPublicationsForm" action="/publications/<%=publication._id%>?_method=PUT" method="POST"
+                novalidate class="validated-form">
+                <div class="mb-3">
+                    <label class="form-label" for="content">Edit publications list</label>
+                    <input type="hidden" id="imageIds" name="publication[imageIds]">
+                    <input type="hidden" id="imageIdsToDelete" name="publication[imageIdsToDelete]">
+                    <input type="hidden" id="content" name="content" aria-describedby="content" required>
+                    <div id="editor-container" class="form-control editor-container"><%-publication.content%></div>
+                </div>
+                <div class="my-3 text-end">
+                    <button type="submit" class="btn btn-success d-inline-block mb-3">Save changes</button>
+                    <a class="d-block" href="/publications">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/editor-image-handler.js"></script>
