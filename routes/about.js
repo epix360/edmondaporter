@@ -13,18 +13,18 @@ const BlogPost = require('../models/blogpost');
 //       res.render('about/index', {profiles})
 //   }))
   
-  router.get('/new', catchAsync(async (req, res) => {
+  router.get('/new', isLoggedIn, catchAsync(async (req, res) => {
     res.render('about/new', { currentPage: 'about' })
   }))
 
-  router.get('/', catchAsync(async (req, res) => {
-    // const profile = await Profile.findOne({ id: { $eq: req.params._id } });
-    // const blogPosts = await BlogPost.find({ profile: profile._id }).sort({ date: -1 });
+  router.get('/', isLoggedIn, catchAsync(async (req, res) => {
+    const profile = await Profile.findOne({ id: { $eq: req.params._id } });
+    const blogPosts = await BlogPost.find({ profile: profile._id }).sort({ date: -1 });
     res.render('about/show', {currentPage: 'about'})
   }))
   
   
-  router.post('/new', upload.single('image'), catchAsync(async (req, res, next) => {
+  router.post('/new', isLoggedIn, upload.single('image'), catchAsync(async (req, res, next) => {
     try {
       const { name, pname, username, password, image, filename, bio } = req.body;
       const profile = new Profile({ name, pname, username, image, filename, bio });
