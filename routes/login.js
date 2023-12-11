@@ -8,7 +8,7 @@ const Profile = require('../models/profile');
 router.get('/', catchAsync(async (req, res) => {
     const profile = await Profile.findOne({ pname: { $eq: req.params.pname } });
     const profiles = await Profile.find({})
-    res.render('login', { profile, profiles, currentPage: 'login' })
+    res.render('login', { profile, profiles, currentPage: 'login', title: 'Edmond A. Porter | Login' })
 }))
 
 router.post('/',

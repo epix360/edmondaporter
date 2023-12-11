@@ -11,7 +11,7 @@ router.get('/', catchAsync(async (req, res) => {
     const profile = await Profile.findOne({ id: { $eq: req.params._id } });
     const publication = await Publication.findOne({});
     const publications = await Publication.find({});
-    res.render('publications', { profile, publication, publications, currentPage: 'publications' })
+    res.render('publications', { profile, publication, publications, currentPage: 'publications', title: 'Edmond A. Porter | Publications' })
 }))
 
 router.get('/new', isLoggedIn, catchAsync(async (req, res) => {

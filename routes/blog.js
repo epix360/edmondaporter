@@ -10,7 +10,7 @@ const { cloudinary } = require('../cloudinary');
 router.get('/', catchAsync(async (req, res) => {
     const profile = await Profile.findOne({ id: { $eq: req.params._id } });  
     const blogPosts = await BlogPost.find({ profile: profile._id }).limit(20).sort({ date: -1 });
-    res.render('blog/index', { profile, blogPosts, currentPage: 'blog' })
+    res.render('blog/index', { profile, blogPosts, currentPage: 'blog', title: 'Edmond A. Porter | Blog' })
 }))
 
 router.get('/archive', catchAsync(async (req, res) => {

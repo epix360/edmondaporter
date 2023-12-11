@@ -28,8 +28,8 @@ const Home = require('./models/home');
 
 const MongoStore = require('connect-mongo');
 
-const dbUrl = process.env.DB_URL;
-// const dbUrl = 'mongodb://localhost:27017/edmondaporter'
+// const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://localhost:27017/edmondaporter'
 
 mongoose.connect(dbUrl);
 
@@ -158,7 +158,7 @@ app.get('/', catchAsync(async (req, res) => {
   const home = await Home.findById(id);
   const homes = await Home.find({});
   const profile = await Profile.findOne({});
-  res.render('index', { profile, home, homes, currentPage: 'home' })
+  res.render('index', { profile, home, homes, currentPage: 'home', title: 'Edmond A. Porter | Author' })
 }))
 
 app.get('/new', isLoggedIn, catchAsync(async (req, res) => {
