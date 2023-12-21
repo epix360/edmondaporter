@@ -14,8 +14,8 @@ const extension = (joi) => ({
                     allowedTags: [],
                     allowedAttributes: {},
                 });
-                if (clean !== value) return helpers.error('string.escapeHTML', { value })
-                return clean;
+
+                return clean !== value ? helpers.error('string.escapeHTML', { value }) : clean;
             }
         }
     }

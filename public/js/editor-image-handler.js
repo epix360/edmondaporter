@@ -26,32 +26,30 @@ const quill = new Quill('#editor-container', {
             container: toolbarOptions
         },
         imageUploader: {
-            upload: (file) => {
-                return new Promise((resolve, reject) => {
+            upload: async (file) => {
+                try {
                     const formData = new FormData();
                     formData.append("file", file);
                     formData.append("folder", `edmondaporter`);
                     formData.append("upload_preset", "hrbbhef2");
 
-                    fetch(
+                    const response = await fetch(
                         "https://api.cloudinary.com/v1_1/dzfjji5xy/image/upload",
                         {
                             method: "POST",
                             body: formData
                         }
-                    )
-                        .then((response) => response.json())
-                        .then((result) => {
-                            var { secure_url, public_id } = result;
-                            cloudinaryPublicIds.push(public_id);
-                            imageInput.value = cloudinaryPublicIds;
-                            resolve(secure_url)
-                        })
-                        .catch((error) => {
-                            reject("Upload failed");
-                            console.error("Error:", error);
-                        });
-                });
+                    );
+
+                    const result = await response.json();
+                    const { secure_url, public_id } = result;
+                    cloudinaryPublicIds.push(public_id);
+                    imageInput.value = cloudinaryPublicIds;
+                    return secure_url;
+                } catch (error) {
+                    console.error("Error:", error);
+                    throw new Error("Upload failed");
+                }
             }
         },
     },
@@ -73,39 +71,28 @@ var homeInput = document.querySelector('input[id=content]');
 update();
 
 function update(delta) {
-    var contents = quill.getContents();
+    const contents = quill.getContents();
     console.log('contents', contents);
-    var html = "contents = " + JSON.stringify(contents, null, 2);
+    let html = `contents = ${JSON.stringify(contents, null, 2)}`;
     if (delta) {
-        console.log('change', delta)
-        html = "change = " + JSON.stringify(delta, null, 2) + "\n\n" + html;
+        console.log('change', delta);
+        html = `change = ${JSON.stringify(delta, null, 2)}\n\n${html}`;
     }
 
-    //EXTRACTS CLOUDINARY PUBLIC_ID FROM IMG URL AND ASSIGNS AS IMG ID IN HTML (ONLY WHEN IN .ql-editor)
-    let imgs = document.querySelectorAll('.ql-editor img');
-    let imgArr = [...imgs];
-    for (let i = 0; i < imgArr.length; i++) {
-        let imgUrl = imgArr[i].src;
-        let imgSplit = imgUrl.split('/').pop();
-        let imgId = "edmondaporter" + "/" + imgSplit.split('.').shift();
-        imgArr[i].setAttribute("id", imgId);
-    }
+    const inputs = [bioInput, blogInput, publicationInput, linkInput, homeInput];
+    inputs.forEach(input => {
+        if (input) {
+            input.value = quill.root.innerHTML;
+        }
+    });
 
-    if (bioInput) {
-        bioInput.value = quill.root.innerHTML;
-    }
-    if (blogInput) {
-        blogInput.value = quill.root.innerHTML;
-    }
-    if (publicationInput) {
-        publicationInput.value = quill.root.innerHTML;
-    }
-    if (linkInput) {
-        linkInput.value = quill.root.innerHTML;
-    }
-    if (homeInput) {
-        homeInput.value = quill.root.innerHTML;
-    }
+    const imgElements = document.querySelectorAll('.ql-editor img');
+    imgElements.forEach(imgElement => {
+        const imgUrl = imgElement.src;
+        const imgSplit = imgUrl.split('/').pop();
+        const imgId = `edmondaporter/${imgSplit.split('.').shift()}`;
+        imgElement.setAttribute('id', imgId);
+    });
 }
 
 // Select the node that will be observed for mutations
@@ -113,15 +100,16 @@ const targetNode = document.body;
 // Options for the observer (which mutations to observe)
 const config = { attributes: true, attributeOldValue: true, childList: true, subtree: true };
 
-// Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
     for (let mutation of mutationList) {
-        let attributes;
+        const attributes = mutation.removedNodes[0]?.attributes;
         if (attributes) {
-            idsToDestroy.push(mutation.removedNodes[0].attributes[1].value)
-            let imageIdsToDelete = idsToDestroy.toString();
-            let idsToDeleteInput = document.querySelector('#imageIdsToDelete');
-            idsToDeleteInput.value = imageIdsToDelete;
+            const imageId = attributes[1]?.value;
+            if (imageId) {
+                idsToDestroy.push(imageId);
+                const imageIdsToDelete = idsToDestroy.join();
+                document.querySelector('#imageIdsToDelete').value = imageIdsToDelete;
+            }
         }
     }
 };

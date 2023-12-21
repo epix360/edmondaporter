@@ -3,20 +3,23 @@
     emailjs.init('HfqzXzg24u4VT7IwB');
 })();
 
-window.onload = function() {
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('contact-form').addEventListener('submit', (event) => {
         event.preventDefault();
-        // generate a five digit number for the contact_number variable
-        this.contact_number.value = Math.random() * 100000 | 0;
-        // these IDs from the previous steps
-        emailjs.sendForm('service_g5clgej', 'template_2flsjn5', this)
-            .then(function() {
+        const contact_number = Math.floor(Math.random() * 100000);
+        const templateParams = {
+            contact_number: contact_number,
+            ...this
+        };
+        emailjs.send('service_g5clgej', 'template_2flsjn5', templateParams)
+            .then(() => {
                 console.log('SUCCESS!');
-            }, function(error) {
+            })
+            .catch((error) => {
                 console.log('FAILED...', error);
             });
     });
-}
+});
 
 const form = document.querySelector('form');
 const heading = document.querySelector('h2');

@@ -27,8 +27,9 @@ articleImgs.forEach(x => x.classList.add('img-fluid'));
 const btnLink = document.querySelectorAll('article p a');
 btnLink.forEach(x => x.classList.add('btn-link'));
 
-//SETS YEAR FOR FOOTER
+// Sets the year for the footer
 const setYear = () => {
     const copyrightYear = document.getElementById("year");
-    copyrightYear.innerHTML = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
+    copyrightYear.textContent = currentYear;
 }
