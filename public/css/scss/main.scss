@@ -78,6 +78,10 @@ body {
         }
     }
 
+    #editor-container {
+        height: 50vh;
+    }
+
     details summary::-webkit-details-marker,
     details summary::marker {
         display: none;
