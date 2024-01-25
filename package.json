@@ -2,7 +2,7 @@
   "dependencies": {
     "@emailjs/nodejs": "^2.2.0",
     "body-parser": "^1.20.2",
-    "bootstrap-icons": "^1.11.2",
+    "bootstrap-icons": "^1.11.3",
     "cloudinary": "^1.41.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
